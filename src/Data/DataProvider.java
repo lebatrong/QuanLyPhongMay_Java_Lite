@@ -5,6 +5,7 @@ package Data;
  *
  * @author batro
  */
+import java.io.FileReader;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,13 +16,30 @@ import javax.swing.*;
 
 public class DataProvider {
 
+    String path="src/Data/Connection.txt";
+    
     public Connection Get_Connection()
     {
         Connection con=null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/qlpm","root","123456");
+            FileReader fr= new FileReader(path);
+                
+            int i;
+
+            String c="";
+
+            do{
+                i=fr.read();
+                c+=(char)i;
+            }while(i!=-1);
+
+            String a[]= c.split(" ");
+
+            String url="jdbc:mysql://" + a[0]+":"+a[1] +"/qlpm";
+
+            con= DriverManager.getConnection(url,a[2],a[3]);
             
             if(con!=null)
                 System.out.println("Kết nối thành công!");
@@ -32,6 +50,40 @@ public class DataProvider {
             System.out.println(e.toString());
         }
         return con;   
+    }
+    
+    public Connection Get_Connection_Master()
+    {
+        Connection con=null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            
+            FileReader fr= new FileReader(path);
+                
+            int i;
+
+            String c="";
+
+            do{
+                i=fr.read();
+                c+=(char)i;
+            }while(i!=-1);
+
+            String a[]= c.split(" ");
+
+            String url="jdbc:mysql://" + a[0]+":"+a[1] +"/";
+
+            con= DriverManager.getConnection(url,a[2],a[3]);
+            
+            if(con!=null)
+                System.out.println("Kết nối thành công!");
+            
+            
+        } catch (Exception e) {
+            
+            System.out.println(e.toString());
+        }
+        return con;  
     }
     
     public ResultSet Get_Data(String query) throws SQLException

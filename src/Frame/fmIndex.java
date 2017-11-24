@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class fmIndex extends javax.swing.JFrame {
 
+    String path="data/Connection.txt";
     /**
      * Creates new form fmIndex
      */
@@ -220,14 +221,12 @@ public class fmIndex extends javax.swing.JFrame {
             
             String arr[]=kq.split("--");
             
+            Data.DataProvider data= new Data.DataProvider();
             
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conCreate= DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","123456");
-            Statement st= conCreate.createStatement();
+            Statement st= data.Get_Connection_Master().createStatement();
             st.execute(arr[0]);
             
-            Connection conData= DriverManager.getConnection("jdbc:mysql://localhost:3306/qlpm","root","123456");
-            st=conData.createStatement();
+            st=data.Get_Connection().createStatement();
             for(int a=1; a<arr.length-1;a++)
             {
                 st.execute(arr[a]);
@@ -243,23 +242,87 @@ public class fmIndex extends javax.swing.JFrame {
     private void jPanel1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jPanel1AncestorAdded
       
     }//GEN-LAST:event_jPanel1AncestorAdded
-
+    //Kiểm tra kết nối từ file có thành công hay không
+    private  boolean  checkSetingConneciton()
+    {
+        if(LoadSetting())
+        {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                
+                FileReader fr= new FileReader(path);
+                
+                int i;
+                
+                String c="";
+                
+                do{
+                    i=fr.read();
+                    c+=(char)i;
+                }while(i!=-1);
+                
+                String a[]= c.split(" ");
+                
+                String url="jdbc:mysql://" + a[0]+":"+a[1] +"/";
+                
+                Connection con= DriverManager.getConnection(url,a[2],a[3]);
+                
+                return  true;
+            } catch (Exception e) {
+                System.err.println(e.toString());
+                return false;
+            }
+        }else
+            return false;
+    }
+    //Kiểm tra file có dữ liệu chưa
+    private boolean LoadSetting()
+    {
+        try {
+            FileReader fr= new FileReader(path);
+            if(fr.read()==-1)
+            {
+                fr.close();
+                return false;
+            }
+            else
+            {
+                fr.close();
+                return true;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Không tìm thấy file hệ thống! vui lòng kiểm tra lại phần mềm","Lỗi!",2);
+            System.exit(0);
+            return false;
+        }
+    }
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         
         
-        if(checkDataBase()==true)
-       {
-           lblLogin.setVisible(true);
-           btnLogin.setVisible(true);
-           lblCreate.setVisible(false);
-           btnCreateDatabase.setVisible(false);
-       }else
-       {
-           lblLogin.setVisible(false);
-           btnLogin.setVisible(false);
-           lblCreate.setVisible(true);
-           btnCreateDatabase.setVisible(true);           
-       }
+        if(checkSetingConneciton())
+        {
+           if(checkDataBase()==true)
+           {
+               lblLogin.setVisible(true);
+               btnLogin.setVisible(true);
+               lblCreate.setVisible(false);
+               btnCreateDatabase.setVisible(false);
+           }else
+           {
+               lblLogin.setVisible(false);
+               btnLogin.setVisible(false);
+               lblCreate.setVisible(true);
+               btnCreateDatabase.setVisible(true);           
+           }
+        }else
+        {
+            lblLogin.setVisible(false);
+            btnLogin.setVisible(false);
+            lblCreate.setVisible(false);
+            btnCreateDatabase.setVisible(false);
+            frmSetConnection frm= new frmSetConnection();
+            frm.show();
+        }
     }//GEN-LAST:event_formWindowActivated
 
     /**
