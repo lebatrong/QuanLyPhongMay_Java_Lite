@@ -16,7 +16,7 @@ import javax.swing.*;
 
 public class DataProvider {
 
-    String path="src/Data/Connection.txt";
+    String path="data/Connection.txt";
     
     public Connection Get_Connection()
     {

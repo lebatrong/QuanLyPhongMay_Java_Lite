@@ -201,7 +201,24 @@ public class fmIndex extends javax.swing.JFrame {
     {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conData= DriverManager.getConnection("jdbc:mysql://localhost:3306/qlpm","root","123456");
+            
+            FileReader fr= new FileReader(path);
+                
+            int i;
+
+            String c="";
+
+            do{
+                i=fr.read();
+                c+=(char)i;
+            }while(i!=-1);
+
+            String a[]= c.split(" ");
+
+            String url="jdbc:mysql://" + a[0]+":"+a[1] +"/qlpm";
+
+            Connection con= DriverManager.getConnection(url,a[2],a[3]);
+            
             return true;
         } catch (Exception e) {
             return false;

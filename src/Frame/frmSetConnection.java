@@ -149,7 +149,7 @@ public class frmSetConnection extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettingActionPerformed
-        if(!txtPort.getText().matches("") && !txtPwd.getText().matches("") && !txtServer.getText().matches("") && !txtUser.getText().matches(""))
+        if(!txtPort.getText().matches("") && !txtServer.getText().matches("") && !txtUser.getText().matches(""))
         {
             try {
                 FileWriter fw= new FileWriter(path);
@@ -192,8 +192,6 @@ public class frmSetConnection extends javax.swing.JFrame {
                 lblErrorServer.setText("*");
             if(txtUser.getText().matches(""))
                 lblErrorUser.setText("*");
-            if(txtPwd.getText().matches(""))
-                lblErrorPwd.setText("*");
             JOptionPane.showMessageDialog(null,"Giá trị không hợp lệ!","Thông báo",2);
         }
     }//GEN-LAST:event_btnSettingActionPerformed
