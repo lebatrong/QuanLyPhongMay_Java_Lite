@@ -5,6 +5,7 @@ package Data;
  *
  * @author batro
  */
+import java.io.File;
 import java.io.FileReader;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -16,7 +17,8 @@ import javax.swing.*;
 
 public class DataProvider {
 
-    String path="data/Connection.txt";
+    File Directory = new File("");
+    String pathConnection=Directory.getAbsolutePath()+"/data/Connection.txt";
     
     public Connection Get_Connection()
     {
@@ -24,7 +26,7 @@ public class DataProvider {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             
-            FileReader fr= new FileReader(path);
+            FileReader fr= new FileReader(pathConnection);
                 
             int i;
 
@@ -58,7 +60,7 @@ public class DataProvider {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             
-            FileReader fr= new FileReader(path);
+            FileReader fr= new FileReader(pathConnection);
                 
             int i;
 

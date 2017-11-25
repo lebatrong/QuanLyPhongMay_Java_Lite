@@ -7,6 +7,7 @@ package Frame;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.io.File;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,8 +20,9 @@ import javax.swing.JOptionPane;
  * @author batro
  */
 public class fmIndex extends javax.swing.JFrame {
-
-    String path="data/Connection.txt";
+    File Directory = new File("");
+    String pathConnection=Directory.getAbsolutePath()+"/data/Connection.txt";
+    String path=Directory.getAbsolutePath();
     /**
      * Creates new form fmIndex
      */
@@ -38,7 +40,8 @@ public class fmIndex extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel(){
-            ImageIcon icon = new ImageIcon("img/images.jpg");
+            File path= new File("");
+            ImageIcon icon = new ImageIcon(path.getAbsolutePath()+"/img/images.jpg");
             public void paintComponent(Graphics g){
                 Dimension d = getSize();
                 g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
@@ -153,6 +156,10 @@ public class fmIndex extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(jLabel5)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -170,11 +177,7 @@ public class fmIndex extends javax.swing.JFrame {
                                 .addComponent(lblCreate)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnCreateDatabase, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 92, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(jLabel5)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(43, 43, 43))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -203,7 +206,7 @@ public class fmIndex extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             
-            FileReader fr= new FileReader(path);
+            FileReader fr= new FileReader(pathConnection);
                 
             int i;
 
@@ -228,7 +231,7 @@ public class fmIndex extends javax.swing.JFrame {
     }
     private void btnCreateDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateDatabaseActionPerformed
          try {
-            FileReader fr= new FileReader("data/DataBase.txt");
+            FileReader fr= new FileReader(path+"/data/DataBase.txt");
             int i;
             String kq="";
             do{
@@ -269,7 +272,7 @@ public class fmIndex extends javax.swing.JFrame {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 
-                FileReader fr= new FileReader(path);
+                FileReader fr= new FileReader(pathConnection);
                 
                 int i;
                 
@@ -298,7 +301,7 @@ public class fmIndex extends javax.swing.JFrame {
     private boolean LoadSetting()
     {
         try {
-            FileReader fr= new FileReader(path);
+            FileReader fr= new FileReader(pathConnection);
             if(fr.read()==-1)
             {
                 fr.close();
