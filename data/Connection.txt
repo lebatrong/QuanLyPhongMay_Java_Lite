@@ -1,1 +1,1 @@
-localhost 3306 root  
+localhost 3306 root 123456 

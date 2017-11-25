@@ -82,6 +82,7 @@ public class fmIndex extends javax.swing.JFrame {
         });
 
         btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pay-per-click-icon.png"))); // NOI18N
+        btnLogin.setVisible(false);
         btnLogin.setBorder(null);
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +91,7 @@ public class fmIndex extends javax.swing.JFrame {
         });
 
         lblLogin.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
+        lblLogin.setVisible(false);
         lblLogin.setForeground(new java.awt.Color(255, 51, 51));
         lblLogin.setText("Đăng nhập để sử dụng phần mềm!");
 
@@ -108,6 +110,7 @@ public class fmIndex extends javax.swing.JFrame {
 
         btnCreateDatabase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Misc-New-Database-icon.png"))); // NOI18N
         btnCreateDatabase.setText("tạo Data");
+        btnCreateDatabase.setVisible(false);
         btnCreateDatabase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateDatabaseActionPerformed(evt);
@@ -115,6 +118,7 @@ public class fmIndex extends javax.swing.JFrame {
         });
 
         lblCreate.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblCreate.setVisible(false);
         lblCreate.setForeground(new java.awt.Color(153, 0, 102));
         lblCreate.setText("Bạn chưa có data vui lòng khởi tạo Data");
 
@@ -230,35 +234,43 @@ public class fmIndex extends javax.swing.JFrame {
         
     }
     private void btnCreateDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateDatabaseActionPerformed
-         try {
-            FileReader fr= new FileReader(path+"/data/DataBase.txt");
-            int i;
-            String kq="";
-            do{
-                i=fr.read();
-                kq+=(char)i;
-                
-            }while(i!=-1);
-            
-            String arr[]=kq.split("--");
-            
-            Data.DataProvider data= new Data.DataProvider();
-            
-            Statement st= data.Get_Connection_Master().createStatement();
-            st.execute(arr[0]);
-            
-            st=data.Get_Connection().createStatement();
-            for(int a=1; a<arr.length-1;a++)
-            {
-                st.execute(arr[a]);
+        if(checkSetingConneciton())
+        { 
+            try {
+                FileReader fr= new FileReader(path+"/data/DataBase.txt");
+                int i;
+                String kq="";
+                do{
+                    i=fr.read();
+                    kq+=(char)i;
+
+                }while(i!=-1);
+
+                String arr[]=kq.split("--");
+
+                Data.DataProvider data= new Data.DataProvider();
+
+                Statement st= data.Get_Connection_Master().createStatement();
+                st.execute(arr[0]);
+
+                st=data.Get_Connection().createStatement();
+                for(int a=1; a<arr.length-1;a++)
+                {
+                    st.execute(arr[a]);
+                }
+
+                JOptionPane.showMessageDialog(null,"Tạo dữ liệu thành công!");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"Vui lòng kiểm tra lại thao tác!","Lỗi",2);
+                 System.err.println(e.toString());
             }
-            
-            JOptionPane.showMessageDialog(null,"Tạo dữ liệu thành công!");
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Vui lòng kiểm tra lại thao tác!","Lỗi",2);
-             System.err.println(e.toString());
+        }else
+        {
+            frmSetConnection f= new frmSetConnection();
+            f.show();
         }
+               
     }//GEN-LAST:event_btnCreateDatabaseActionPerformed
 
     private void jPanel1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jPanel1AncestorAdded
@@ -321,8 +333,7 @@ public class fmIndex extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         
         
-        if(checkSetingConneciton())
-        {
+        
            if(checkDataBase()==true)
            {
                lblLogin.setVisible(true);
@@ -336,15 +347,7 @@ public class fmIndex extends javax.swing.JFrame {
                lblCreate.setVisible(true);
                btnCreateDatabase.setVisible(true);           
            }
-        }else
-        {
-            lblLogin.setVisible(false);
-            btnLogin.setVisible(false);
-            lblCreate.setVisible(false);
-            btnCreateDatabase.setVisible(false);
-            frmSetConnection frm= new frmSetConnection();
-            frm.show();
-        }
+        
     }//GEN-LAST:event_formWindowActivated
 
     /**
