@@ -61,6 +61,7 @@ public class fmIndex extends javax.swing.JFrame {
         setTitle("Quản lý phòng máy");
         setIconImages(null);
         setMaximumSize(new java.awt.Dimension(993, 557));
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);

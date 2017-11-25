@@ -46,6 +46,7 @@ public class login extends javax.swing.JFrame {
         setTitle("Đăng nhập");
         setBackground(new java.awt.Color(255, 255, 255));
         setName("frLogin"); // NOI18N
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Tài khoản:");
@@ -86,7 +87,7 @@ public class login extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(102, 102, 102)
@@ -110,7 +111,7 @@ public class login extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(lblErrorUser)
                                 .addComponent(lblErrorPass)))))
-                .addGap(133, 133, 133))
+                .addGap(142, 142, 142))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
