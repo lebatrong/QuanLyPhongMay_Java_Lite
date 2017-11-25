@@ -227,7 +227,7 @@ public class fmIndex extends javax.swing.JFrame {
     }
     private void btnCreateDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateDatabaseActionPerformed
          try {
-            FileReader fr= new FileReader("data/data.txt");
+            FileReader fr= new FileReader("data/DataBase.txt");
             int i;
             String kq="";
             do{
@@ -253,6 +253,7 @@ public class fmIndex extends javax.swing.JFrame {
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"Vui lòng kiểm tra lại thao tác!","Lỗi",2);
+             System.err.println(e.toString());
         }
     }//GEN-LAST:event_btnCreateDatabaseActionPerformed
 

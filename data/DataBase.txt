@@ -1,4 +1,4 @@
-create database qlpm;
+CREATE DATABASE qlpm CHARACTER SET utf8;
 --
 use qlpm;
 --
@@ -136,17 +136,19 @@ begin
 		
 end 
 --
-
-INSERT INTO `qlpm`.`phongmay` (`MAPHONG`,`TENPHONG`,`TAIKHOAN`)
-VALUES ('A201',N'Phòng máy 1',''),
-	('A202',N'Phòng máy 2',''),
-        ('A203',N'Phòng máy 3',''),
-        ('A204',N'Phòng máy 4',''),
-        ('A205',N'Phòng máy 5',''),
-        ('A206',N'Phòng máy 6','');
---
 INSERT INTO `qlpm`.`giaovien`(`TAIKHOAN`,`HOTEN`,`GIOITINH`,`NGAYSINH`,`HOCVI`,`SDT`,`EMAIL`,`NOISINH`,`PASS`,`QUYEN`)
 VALUES ('admin','Lê Bá Trọng','Nam','1997-09-27','Giáo Sư','0985350434','15004116@student.vlute.edu.vn','Vĩnh Long','1',0);
-
+--
+INSERT INTO `phongmay`(`MAPHONG`, `TAIKHOAN`, `TENPHONG`, `VITRI`) VALUES ('A201','','Phòng máy 1','');
+--
+INSERT INTO `phongmay`(`MAPHONG`, `TAIKHOAN`, `TENPHONG`, `VITRI`) VALUES ('A202','','Phòng máy 2','');
+--
+INSERT INTO `phongmay`(`MAPHONG`, `TAIKHOAN`, `TENPHONG`, `VITRI`) VALUES ('A203','','Phòng máy 3','');
+--
+INSERT INTO `phongmay`(`MAPHONG`, `TAIKHOAN`, `TENPHONG`, `VITRI`) VALUES ('A204','','Phòng máy 4','');
+--
+INSERT INTO `phongmay`(`MAPHONG`, `TAIKHOAN`, `TENPHONG`, `VITRI`) VALUES ('A205','','Phòng máy 5','');
+--
+INSERT INTO `phongmay`(`MAPHONG`, `TAIKHOAN`, `TENPHONG`, `VITRI`) VALUES ('A206','','Phòng máy 6','');
 --
 
