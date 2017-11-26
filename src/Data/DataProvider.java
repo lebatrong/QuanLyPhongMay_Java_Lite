@@ -38,9 +38,13 @@ public class DataProvider {
             }while(i!=-1);
 
             String a[]= c.split(" ");
-
-            String url="jdbc:mysql://" + a[0]+":"+a[1] +"/qlpm";
-
+            String url;
+//Kiểm tra sever là gì
+            if(a[4].matches("1"))
+                url="jdbc:mysql://" + a[0]+":"+a[1] +"/qlpm";
+            else
+                url="jdbc:mysql://" + a[0]+":"+a[1] +"/qlpm?useUnicode=true&characterEncoding=UTF-8";
+            
             con= DriverManager.getConnection(url,a[2],a[3]);
             
             if(con!=null)

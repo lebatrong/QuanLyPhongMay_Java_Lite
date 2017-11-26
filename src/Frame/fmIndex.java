@@ -71,16 +71,6 @@ public class fmIndex extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jPanel1AncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-
         btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pay-per-click-icon.png"))); // NOI18N
         btnLogin.setVisible(false);
         btnLogin.setBorder(null);
@@ -272,11 +262,17 @@ public class fmIndex extends javax.swing.JFrame {
         }
                
     }//GEN-LAST:event_btnCreateDatabaseActionPerformed
-
-    private void jPanel1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jPanel1AncestorAdded
-      
-    }//GEN-LAST:event_jPanel1AncestorAdded
-    //Kiểm tra kết nối từ file có thành công hay không
+//kiểm tra file đã tồn tại hay chưa
+    public boolean CheckFileConnection()
+    {
+        File file= new File(path+"/data/Connection.txt");
+        
+        if(file.exists())
+            return true;
+        else
+            return false;
+    }
+        //Kiểm tra kết nối từ file có thành công hay không
     private  boolean  checkSetingConneciton()
     {
         if(LoadSetting())
@@ -331,9 +327,9 @@ public class fmIndex extends javax.swing.JFrame {
         }
     }
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        
-        
-        
+        try {
+            File file= new File(path+"/data/Connection.txt");
+            
            if(checkDataBase()==true)
            {
                lblLogin.setVisible(true);
@@ -347,6 +343,14 @@ public class fmIndex extends javax.swing.JFrame {
                lblCreate.setVisible(true);
                btnCreateDatabase.setVisible(true);           
            }
+           
+           if(!CheckFileConnection())
+            {
+                file.createNewFile();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Phần mềm không hoàn chỉnh!","Lỗi",2);
+        }
         
     }//GEN-LAST:event_formWindowActivated
 
